@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registration</title>
+    <style>
+      h1 {
+            text-align: center;
+        }
+      /* CSS untuk form registrasi */
+      form {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Registration</h1>
+    <div class="form-container">
+    <form th:action="@{/account/save}" method="post" th:object="${registerDTO}">
+      <!-- Name -->
+      <label for="name">Name:</label>
+      <input th:field="*{name}" name="name" id="name" type="text" />
+      <!-- Email -->
+      <label for="email">Email:</label>
+      <input th:field="*{email}" name="email" id="email" type="text" />
+      <!-- Password -->
+      <label for="password">Password:</label>
+      <input
+        th:field="*{password}"
+        name="password"
+        id="password"
+        type="password"
+      />
+
+      <!-- Status
+      <label for="status">Status:</label>
+      <select th:field="*{status}" id="status">
+        <option value="">Select Status</option>
+        <option value="ACTIVE">Active</option>
+        <option value="INACTIVE">Inactive</option>
+      </select> -->
+
+      <!-- Role dropdown
+      <label for="roleId">Role:</label>
+      <select th:field="*{roleId}" name="roleId" id="roleId">
+        <option value="">Select Role</option>
+        <option
+          th:each="role : ${roles}"
+          th:value="${role.id}"
+          th:text="${role.name}"
+        ></option>
+      </select> -->
+
+      <!-- Department dropdown -->
+      <label for="departmentId">Department:</label>
+      <select th:field="*{department_id}" name="department_id" id="department_id">
+        <option value="">Select Department</option>
+        <option
+          th:each="department : ${departments}"
+          th:value="${department.id}"
+          th:text="${department.name}"
+        ></option>
+      </select>
+
+      <label for="manager_id">Manager:</label>
+      <select th:field="*{manager_id}" id="manager_id">
+        <option value="">Select Manager</option>
+        <option
+          th:each="manager: ${managers}"
+          th:value="${manager.id}"
+          th:text="${manager.name}"
+        ></option>
+      </select>
+
+      <button type="submit">Register</button>
+    </form>
+  </body>
+</html>
