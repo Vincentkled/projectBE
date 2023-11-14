@@ -22,21 +22,29 @@ public class MyUserDetail implements UserDetails, UserDetailsService {
     private String email;
     private String password;
     private String name;
+    private Integer manager_id;
+    public Integer getManager_id() {
+        return manager_id;
+    }
+
     private String role;
     private Integer id;
     private GrantedAuthority grantedAuthority;
+
+
 
     public MyUserDetail() {
         super();
     }
 
-    public MyUserDetail(String email, String password, String name, Integer id, String role) {
+    public MyUserDetail(String email, String password, String name, Integer id, String role, Integer manager_id) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.role = role;
         this.id = id;
         this.grantedAuthority = new SimpleGrantedAuthority(role);
+        this.manager_id = manager_id;
     }
 
     @Override

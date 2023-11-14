@@ -12,10 +12,10 @@ import com.example.project.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-@Query("SELECT new com.example.project.config.MyUserDetail(u.email, u.password, e.name, e.id, r.name) FROM User u JOIN u.employee e JOIN u.role r WHERE u.email = ?1")
+@Query("SELECT new com.example.project.config.MyUserDetail(u.email, u.password, e.name, e.id, r.name, e.manager.id) FROM User u JOIN u.employee e JOIN u.role r WHERE u.email = ?1")
 public UserDetails login(String email);
 
-@Query("SELECT new com.example.project.config.MyUserDetail(u.email, u.password, e.name, e.id, r.name) FROM User u JOIN u.employee e JOIN u.role r WHERE u.email = ?1")
+@Query("SELECT new com.example.project.config.MyUserDetail(u.email, u.password, e.name, e.id, r.name, e.manager.id) FROM User u JOIN u.employee e JOIN u.role r WHERE u.email = ?1")
 public MyUserDetail getData(String email);
 
 

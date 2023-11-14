@@ -68,10 +68,10 @@ public ResponseEntity<Object> save(@RequestBody Timesheet timesheet, @PathVariab
 
         String htmlContent = "<h1 style=\"color:black;\">Good day to you, Mr/Ms."+timesheet.getEmployee().getName()+"</h1>" +
         "<hr>"+
-        "<p style=\"color:black;\">your Timesheet on Date : "+ timesheet.getDateentity().getDatetb() +
-        " with Attendance : "+ timesheet.getAttendance() +" and Activity : " + timesheet.getActivity()
-        + " has been </p>"+
-        "<h1><b> Update ! </b></h1> "+
+        "<p style=\"color:black;\">Your Timesheet on Date : <b>"+ timesheet.getDateentity().getDatetb() +
+        " </b>,  indicates that your attendance is : <b>"+ timesheet.getAttendance() +"</b> and the Activity : <b>" + timesheet.getActivity()
+        + " </b> has been </p>"+
+        "<h1><b> Updated ! </b></h1> "+
         "<p style=\"color:black;\">Please check your <b>Timesheet</b></p>"+
         "<p style=\"color:black;\">Thank you for using our application.<b>-Admin</b></p>"+
         "<hr>";
