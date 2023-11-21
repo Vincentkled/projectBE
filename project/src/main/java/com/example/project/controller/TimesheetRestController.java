@@ -56,7 +56,7 @@ public ResponseEntity<Object> save(@RequestBody Timesheet timesheet, @PathVariab
 
         LocalDateTime now = LocalDateTime.now();
         
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         String formattedDateTime = now.format(dtf);
         MimeMessage message = mailSender.createMimeMessage();
 
@@ -64,17 +64,20 @@ public ResponseEntity<Object> save(@RequestBody Timesheet timesheet, @PathVariab
         String email = timesheetRepository.findEmail(id);
         // String email = timesheet.getEmployee().getUser().getEmail();
         message.setRecipients(MimeMessage.RecipientType.TO, email);
-        message.setSubject("[" + formattedDateTime + "]" + "Timesheet has been Update");
+        message.setSubject("Timesheet has been Update" + "[" + formattedDateTime + "]");
 
-        String htmlContent = "<h1 style=\"color:black;\">Good day to you, Mr/Ms."+timesheet.getEmployee().getName()+"</h1>" +
-        "<hr>"+
-        "<p style=\"color:black;\">Your Timesheet on Date : <b>"+ timesheet.getDateentity().getDatetb() +
-        " </b>,  indicates that your attendance is : <b>"+ timesheet.getAttendance() +"</b> and the Activity : <b>" + timesheet.getActivity()
-        + " </b> has been </p>"+
-        "<h1><b> Updated ! </b></h1> "+
-        "<p style=\"color:black;\">Please check your <b>Timesheet</b></p>"+
-        "<p style=\"color:black;\">Thank you for using our application.<b>-Admin</b></p>"+
-        "<hr>";
+        String htmlContent = "<div style=\"text-align: center;\">" +
+        "<h1 style=\"color: black; font-size: 20px;\">Good day to you, Mr/Ms. " + timesheet.getEmployee().getName() + "</h1>" +
+        "<hr>" +
+        "<p style=\"color: black; font-size: 14px;\"><p>Your Timesheet on Date: <b>" + timesheet.getDateentity().getDatetb() +
+        "</b>, indicates that your attendance is: <b>" + timesheet.getAttendance() + "</b> and the Activity: <b>" + timesheet.getActivity() +
+        "</b> has been</p></p>" +
+        "<h1 style=\"color: green; font-size: 18px;\"><b>Updated!</b></h1>" +
+        "<p style=\"color: black; font-size: 12px;\">Please check your <b>Timesheet</b></p>" +
+        "<p style=\"color: black; font-size: 12px;\">Thank you for using our Timesheet.<b>-Admin</b></p>" +
+        "<hr>" +
+        "</div>";
+    
         message.setContent(htmlContent, "text/html; charset=utf-8");
         mailSender.send(message);
         System.out.println("Message sent Successfully");
